@@ -3,6 +3,8 @@
 REPO_DIR="${GITHUB_REPO_DIR}"
 JVM_RAM="${SERVER_RAM}"
 
+cd /home/container
+
 if [ ! -d "$REPO_DIR" ]; then
 	echo -e "Git Directory does not exist. Cloning git repo..."
 	mkdir -p "$REPO_DIR"
