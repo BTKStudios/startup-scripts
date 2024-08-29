@@ -17,8 +17,6 @@ LAST_COMMIT_FILE="/tmp/last_commit_hash"
 LOG_DIR="/home/container/git-monitor"
 mkdir -p "$LOG_DIR"
 
-exec 3>&1 1>>"$LOG_DIR/log.txt" 2>&1
-
 eval "$(ssh-agent -s)"
 ssh-add /home/container/ssh/id-rsa
 
@@ -32,24 +30,24 @@ LAST_COMMIT=$(git rev-parse HEAD)
 
 while true; do
     # Fetch the latest changes for the specific branch
-   git fetch origin "$BRANCH"
+   git fetch origin "$BRANCH" >> "$LOG_DIR/log.txt"
 
     # Get the latest commit hash on the specified branch
     CURRENT_COMMIT=$(git rev-parse origin/"$BRANCH")
 
     # Compare with the last known commit
     if [ "$CURRENT_COMMIT" != "$LAST_COMMIT" ]; then
-        echo "Changes detected on branch '$BRANCH'! Performing action..."
+        echo "Changes detected on branch '$BRANCH'! Performing action..." >> "$LOG_DIR/log.txt"
         
         # Update the last commit hash
         echo "$CURRENT_COMMIT" > "$LAST_COMMIT_FILE"
 		LAST_COMMIT=$(git rev-parse HEAD)
 
         # Pull changes for the specific branch
-        git pull origin "$BRANCH"
+        git pull origin "$BRANCH" >> "$LOG_DIR/log.txt"
         
     else
-        echo "No changes detected on branch '$BRANCH'."
+        echo "No changes detected on branch '$BRANCH'." >> "$LOG_DIR/log.txt"
     fi
 
     # Sleep for a specified interval (e.g., 60 seconds)
