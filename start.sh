@@ -13,7 +13,7 @@ if [ -n "${GITHUB_REPO_SSH}" ]; then
 	fi
 
 	# Start git-monitor execution
-	sh git-monitor.sh &
+	sh /home/container/startup/git-monitor.sh &
 	GIT_MONITOR_PID=$!
 else
 	echo -e "No GitHub Repo was provided. Skipping git monitor..."
