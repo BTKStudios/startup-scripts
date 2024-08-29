@@ -17,14 +17,12 @@ LAST_COMMIT_FILE="/tmp/last_commit_hash"
 LOG_DIR="/home/container/git-monitor"
 mkdir -p "$LOG_DIR"
 
-# Create a temporary file descriptor 3 for the log file
-exec 3>&1 1>>"$LOG_DIR/log.txt" 2>&1
+exec 3>&1    # Save the original stdout to file descriptor 3
 {
-    while IFS= read -r line; do
-        echo "$line"
-    done <&3
-} &
-tee_pid=$!
+    tee "$LOG_DIR/log.txt" >&3
+} 1>&2 2>&2 &  # Redirect stdout and stderr to tee, which writes to both the log file and stdout
+
+tee_pid=$!   # Save the PID of the background process
 
 eval "$(ssh-agent -s)"
 ssh-add /home/container/ssh/id-rsa
