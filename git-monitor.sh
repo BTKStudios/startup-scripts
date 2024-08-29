@@ -8,6 +8,7 @@ REPO_DIR="${GITHUB_REPO_DIR}"
 # Branch you want to monitor
 BRANCH="${GITHUB_REPO_BRANCH}"
 
+cd /home/container
 # Change to the repository directory
 cd "$REPO_DIR" || { echo "Repository not found!"; exit 1; }
 
