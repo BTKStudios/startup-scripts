@@ -18,8 +18,8 @@ LAST_COMMIT_FILE="/tmp/last_commit_hash"
 LOG_DIR="/home/container/git-monitor"
 mkdir -p "$LOG_DIR"
 
-eval "$(ssh-agent -s)"
-ssh-add /home/container/ssh/id-rsa
+eval "$(ssh-agent -s)" >> "$LOG_DIR/log.txt"
+ssh-add /home/container/ssh/id-rsa >> "$LOG_DIR/log.txt"
 
 # Get the last commit hash from the repository
 get_current_commit() {
