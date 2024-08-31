@@ -13,7 +13,7 @@ cd /home/container/startup
 CURRENT_COMMIT=$(git rev-parse HEAD)
 
 # Fetch and get latest commit hash
-git fetch origin prod
+git fetch origin prod > /dev/null 2>&1
 LATEST_COMMIT=$(git rev-parse origin/"$BRANCH")
 
 if [ "$CURRENT_COMMIT" != "$LATEST_COMMIT" ]; then
