@@ -3,7 +3,7 @@
 REPO_DIR="${GITHUB_REPO_DIR}"
 JVM_RAM="${SERVER_RAM}"
 
-if [ -d /home/container/tmpstartup/ ] rm -r /home/container/tmpstartup/
+[ -d /home/container/tmpstartup/ ] && rm -r /home/container/tmpstartup/
 
 if [ -e /home/container/startup/updater.sh ]; then	
 	cd /home/container/startup
