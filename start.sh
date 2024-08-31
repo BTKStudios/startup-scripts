@@ -3,7 +3,7 @@
 REPO_DIR="${GITHUB_REPO_DIR}"
 JVM_RAM="${SERVER_RAM}"
 
-rm -r /home/container/tmpstartup/
+if [ -d /home/container/tmpstartup/ ] rm -r /home/container/tmpstartup/
 
 if [ -e /home/container/startup/updater.sh ]; then	
 	cd /home/container/startup
@@ -13,11 +13,11 @@ if [ -e /home/container/startup/updater.sh ]; then
 
 	# Fetch and get latest commit hash
 	git fetch origin prod
-	LATEST_COMMIT=$(git rev-parse origin/"$BRANCH")
+	LATEST_COMMIT=$(git rev-parse origin/prod)
 
 	if [ "$CURRENT_COMMIT" != "$LATEST_COMMIT" ]; then
 		echo -e "New update available. Running updater..."
-		cp /home/container/startup/updater.sh /home/container/tmpstartup/updater.sh
+		mkdir -p /home/container/tmpstartup/ && cp /home/container/startup/updater.sh /home/container/tmpstartup/updater.sh
 		bash /home/container/tmpstartup/updater.sh
 		exit 0
 	fi

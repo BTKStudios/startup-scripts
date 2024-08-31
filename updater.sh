@@ -18,7 +18,7 @@ LATEST_COMMIT=$(git rev-parse origin/"$BRANCH")
 
 if [ "$CURRENT_COMMIT" != "$LATEST_COMMIT" ]; then
 	echo -e "Merging new changes to startup scripts."
-	git merge origin/prod
+	git pull
 fi
 
 echo -e "Running startup script."
