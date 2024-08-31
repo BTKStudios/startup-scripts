@@ -17,6 +17,9 @@ git fetch origin prod
 LATEST_COMMIT=$(git rev-parse origin/"$BRANCH")
 
 if [ "$CURRENT_COMMIT" != "$LATEST_COMMIT" ]; then
-	echo -e "New version of startup scripts detected. Updating..."
+	echo -e "Merging new changes to startup scripts."
 	git merge origin/prod
 fi
+
+echo -e "Running startup script."
+bash /home/container/startup/start.sh
