@@ -16,6 +16,7 @@ if [ -e /home/container/startup/updater.sh ]; then
 	LATEST_COMMIT=$(git rev-parse origin/"$BRANCH")
 
 	if [ "$CURRENT_COMMIT" != "$LATEST_COMMIT" ]; then
+		echo -e "New update available. Running updater..."
 		cp /home/container/startup/updater.sh /home/container/tmpstartup/updater.sh
 		bash /home/container/tmpstartup/updater.sh
 		exit 0
