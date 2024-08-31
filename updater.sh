@@ -5,6 +5,7 @@ SCRIPT_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 if [ $SCRIPT_PATH == /home/container/startup]; then
 	echo -e "Script Directory is inside Git repo. Unsafe to update. Aborting..."
 	exit 1
+fi
 	
 git config --global --add safe.directory /home/container/startup
 cd /home/container/startup
