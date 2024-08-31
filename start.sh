@@ -3,7 +3,27 @@
 REPO_DIR="${GITHUB_REPO_DIR}"
 JVM_RAM="${SERVER_RAM}"
 
+rm -r /home/container/tmpstartup/
+
+if [ -e /home/container/startup/updater.sh ]; then	
+	cd /home/container/startup
+
+	# Get current commit hash
+	CURRENT_COMMIT=$(git rev-parse HEAD)
+
+	# Fetch and get latest commit hash
+	git fetch origin prod
+	LATEST_COMMIT=$(git rev-parse origin/"$BRANCH")
+
+	if [ "$CURRENT_COMMIT" != "$LATEST_COMMIT" ]; then
+		cp /home/container/startup/updater.sh /home/container/tmpstartup/updater.sh
+		bash /home/container/tmpstartup/updater.sh
+		exit 0
+	fi
+fi
+	
 cd /home/container
+	
 
 if [ -n "${GITHUB_REPO_SSH}" ]; then
 	if [ ! -d "$REPO_DIR" ]; then
