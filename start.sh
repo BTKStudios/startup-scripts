@@ -43,7 +43,7 @@ fi
 mkfifo pipe
 
 echo -e "Creating pipe..."
-cat | pipe &
+cat > pipe &
 CAT_PID=$!
 
 echo -e "Starting Minecraft Server..."
