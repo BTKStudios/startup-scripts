@@ -52,7 +52,8 @@ java -Xmx$JVM_RAM -Xms$JVM_RAM -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+P
 SERVER_PID=$!
 
 while ps -p $SERVER_PID > /dev/null; do		
-	timeout --foreground 5 cat > pipe
+	timeout --foreground 5 cat pipe || echo "Timeout"
+	echo "Continue"
 done
 
 wait $SERVER_PID
