@@ -5,6 +5,7 @@ JVM_RAM="${SERVER_RAM}"
 
 exit_parent() {
 	echo "Exiting script..."
+	kill -- -$$
 	exit 0
 }
 
