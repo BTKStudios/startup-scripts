@@ -58,16 +58,13 @@ SERVER_PID=$!
 
 (
 trap exit_parent EXIT
-wait $SERVER_PID
+while [ -e /proc/$SERVER_PID ]; do sleep .6; done;
 echo -e "Minecraft server exited."
 
 if [ -n "${GITHUB_REPO_SSH}" ]; then
 	echo -e "Killing git monitor.."
 	# Kill git-monitor.sh when the Minecraft server exits
 	kill $GIT_MONITOR_PID
-
-	# Wait for git-monitor.sh to clean up/terminate before terminating main script
-	wait $GIT_MONITOR_PID
 	exit 0
 else
 	exit 0
