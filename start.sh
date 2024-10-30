@@ -54,7 +54,7 @@ SERVER_PID=$!
 bash -c "while [ -e /proc/$SERVER_PID ]; do sleep .6; done; echo -e \"Terminating cat...\"; cat <<< \" \"" &
 
 while ps -p $SERVER_PID > /dev/null; do
-	cat > pipe
+	cat > pipe || break
 done
 
 wait $SERVER_PID
