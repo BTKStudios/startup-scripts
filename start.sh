@@ -53,14 +53,10 @@ SERVER_PID=$!
 
 while ps -p $SERVER_PID > /dev/null; do
 	cat > pipe &
-	echo -e "Server up"
 done
-LOOP_PID=$!
 
 wait $SERVER_PID
 echo -e "Minecraft server exited."
-
-kill $LOOP_PID
 
 if [ -n "${GITHUB_REPO_SSH}" ]; then
 	echo -e "Killing git monitor.."
