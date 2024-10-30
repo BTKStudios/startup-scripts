@@ -52,8 +52,9 @@ java -Xmx$JVM_RAM -Xms$JVM_RAM -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+P
 SERVER_PID=$!
 
 while ps -p $SERVER_PID > /dev/null; do
-	cat > pipe
-done &
+	cat > pipe &
+	echo -e "Server up"
+done
 LOOP_PID=$!
 
 wait $SERVER_PID
