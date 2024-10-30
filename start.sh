@@ -52,10 +52,7 @@ java -Xmx$JVM_RAM -Xms$JVM_RAM -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+P
 SERVER_PID=$!
 
 while ps -p $SERVER_PID > /dev/null; do		
-	if read -r input < /dev/stdin; then
-		echo "Redirecting $input to pipe..."
-		echo "$input" > pipe
-    fi
+	timeout --foreground 5 cat > pipe
 done
 
 wait $SERVER_PID
