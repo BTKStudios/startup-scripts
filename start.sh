@@ -52,7 +52,7 @@ java -Xmx$JVM_RAM -Xms$JVM_RAM -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+P
 SERVER_PID=$!
 
 
-bash -c "while ps -p $SERVER_PID > /dev/null; do; cat > pipe; done" &
+bash -c "while ps -p $SERVER_PID > /dev/null; do cat > pipe; done" &
 CAT_PID=$!
 
 wait $SERVER_PID
