@@ -52,5 +52,5 @@ while true; do
     fi
 
     # Sleep for a specified interval (e.g., 60 seconds)
-    sleep 60
+    sleep 10
 done
