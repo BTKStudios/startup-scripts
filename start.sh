@@ -46,6 +46,16 @@ else
 	echo -e "No GitHub Repo was provided. Skipping git monitor..."
 fi
 
+if [ ! -d "/home/container/plugins/Skript/scripts/network/" ]; then
+	echo -e "Network Skripts Git Directory does not exist. Cloning git repo..."
+	mkdir -p "$/home/container/plugins/Skript/scripts/network/"
+	ssh-agent bash -c "ssh-add /home/container/ssh/id-rsa; git clone -b main --single-branch git@github.com:BTKStudios/network-skript.git /home/container/plugins/Skript/scripts/network/"
+fi
+
+# Start network skripts git-monitor execution.
+sh /home/container/startup/network-skripts.sh &
+NS_GIT_MONITOR_PID=$!
+
 if [ -e pipe ]; then
 	echo -e "Pipe already created. Deleting..."
 	rm pipe
@@ -66,6 +76,8 @@ if [ -n "${GITHUB_REPO_SSH}" ]; then
 	echo -e "Killing git monitor.."
 	# Kill git-monitor.sh when the Minecraft server exits
 	kill $GIT_MONITOR_PID
+	echo -e "Killing network skripts git monitor.."
+	kill $NS_GIT_MONITOR_PID
 	exit 0
 else
 	exit 0
