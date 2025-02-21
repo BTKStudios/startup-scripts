@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "NS Git monitor started. Monitoring every minute."
+export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/home/container/.ssh/known_hosts"
 
 # Path to your local repository
 REPO_DIR="/home/container/plugins/Skript/scripts/network/"
