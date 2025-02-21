@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Git monitor started. Monitoring every minute."
+export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/home/container/.ssh/known_hosts"
 
 # Path to your local repository
 REPO_DIR="${GITHUB_REPO_DIR}"

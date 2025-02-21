@@ -2,6 +2,7 @@
 
 REPO_DIR="${GITHUB_REPO_DIR}"
 JVM_RAM="${SERVER_RAM}"
+export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/home/container/.ssh/known_hosts"
 
 exit_parent() {
 	echo "Exiting script..."
