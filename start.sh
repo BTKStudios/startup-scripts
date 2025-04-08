@@ -79,6 +79,11 @@ if [ -n "${GITHUB_REPO_SSH}" ]; then
 	kill $GIT_MONITOR_PID
 	echo -e "Killing network skripts git monitor.."
 	kill $NS_GIT_MONITOR_PID
+	
+	if [ -e pipe ]; then
+		echo -e "Deleting pipe..."
+		rm pipe
+	fi
 	exit 0
 else
 	exit 0
