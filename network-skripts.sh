@@ -7,7 +7,7 @@ export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/home/container/.ssh/known_hos
 REPO_DIR="/home/container/plugins/Skript/scripts/network/"
 
 # Branch you want to monitor
-BRANCH="main"
+BRANCH="$NS_GIT_BRANCH"
 
 cd /home/container
 # Change to the repository directory
